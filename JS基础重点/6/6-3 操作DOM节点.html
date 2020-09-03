@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+    <style>
+        .title{
+            border: 1px solid black;
+        }
+        .title1{
+            background-color: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+    <p class="title">首页</p>
+    <p class="title">详情页</p>
+    <div id="loading">
+        <input type="email" name="" id="">
+        <input type="password" name="" id="">
+    </div>
+    <button type="submit">登录</button>
+
+    <script>
+        //操作dom节点
+        const load = document.getElementById('loading')
+        const user = document.getElementsByTagName('input')
+        const title = document.getElementsByClassName('.title')
+        const plist = document.querySelectorAll('p')
+
+        console.log(load)
+        console.log(user)
+        console.log(title)
+        console.log(plist)
+
+
+        //dom的property   修改JS变量
+        const p = plist[0]
+        console.log("p",p.className)
+        p.className = 'title1'
+
+        //获取nodeName和nodeType
+        console.log("p.nodeName",p.nodeName) //节点名称
+        console.log("p.nodeType",p.nodeType) //节点类型
+
+
+
+        //dom的attribute   修改dom属性
+        const p2 = plist[1]
+        p2.setAttribute('data-name','changeDom')
+        console.log(p2.getAttribute('data-name'))
+        p2.setAttribute('style','font-size:50px')
+        console.log(p2.getAttribute('style'))
+    </script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+2面试题
+
+Vue面试题
+v-show 和 v-if 的区别
+为何 v-for 中要用 key
+描述Vue组件生命周期（有父子组件的情况）
+Vue组件如何通讯
+描述组件渲染和更新的过程
+双向数据绑定v-model的实现原理
+
+React面试题
+React组件如何通讯
+JSX本质是什么
+context是什么，有何用途？
+shouldComponentUpdate的用途（SCU），怎么进行性能优化的？
+描述redux单项数据流
+setState是同步还是异步（场景题）
+
+框架综合应用
+基于React设计一个todolist（组件结构，redux state数据结构）
+基于Vue设计一个购物车（组件结构，vuex state数据结构）
+
+webpack面试题
+前端代码为何要进行构建和打包 
+module chunk bundle 分别意思及区别
+loader 和 plugin 的区别
+webpack如何实现懒加载
+webpack常见性能优化
+babel-runtime 和 babel-polyfill 的区别
+
+
+框架侧重点
+框架的使用（基本使用，高级特性，周边插件）
+框架的原理（基本的原理，热门技术的深度，全面性）
+框架的实际应用，设计能力（组件结构，数据结构）

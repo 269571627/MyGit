@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rotation chart</title>
+	<script src="js/animate.js"></script>
+</head>
+<style>
+*{
+padding: 0px;
+margin: 0px;
+list-style:none;
+text-decoration: none;
+}
+#container{
+    height:300px;
+    width: 600px;
+    position: relative;
+    border: 1px solid #465;
+    overflow: hidden;
+}
+#list{
+   position: absolute;
+   width: 4200px;
+   height: 300px;
+   z-index: 1;
+   overflow: hidden;
+   left: -600px;
+}
+#list img{
+   float: left;
+    width: 600px;
+    height: 300px;
+}
+#buttons{
+    position: absolute;
+    left: 250px;
+    bottom: 20px;
+    height: 10px;
+    width: 100px;
+    z-index: 2;
+}
+#buttons span{
+    float: left;
+    margin-right: 5px;
+    width: 10px;
+    height: 10px;
+    border: 1px solid #fff;
+    border-radius: 50%;
+    background: #333;
+    cursor: pointer;
+    z-index: 2;
+    border: 2px solid #b9beba;
+    border-color: hsla(0,0%,100%,.4);
+}
+}
+#prev {
+    left: 20px;
+    position: absolute;
+  } 
+#next {
+    right: 20px;
+}
+.arrow {
+    position: absolute;
+    top: 53px;
+    z-index: 2;
+    display: none;
+    width: 28px;
+    height: 148px;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 139px;
+    text-align: center;
+    color: hsla(0,0%,100%,.4);
+    background-color: rgba(0,0,0,.2);
+    cursor: pointer;
+}
+#container:hover .arrow
+{   display: block;    }
+
+#buttons .on {
+    background: #f10215;
+}
+
+</style>
+<body>
+    <div class="header">
+      <div id="container">
+          <div id="list" class="list">
+              <div class="list"><img src="images/5.jpg" alt="5"/></div>
+			  <div class="list"><img src="images/1.jpg" alt="1"/></div>
+			  <div class="list"><img src="images/2.jpg" alt="2"/></div>
+			  <div class="list"><img src="images/3.jpg" alt="3"/></div>
+			  <div class="list"><img src="images/4.jpg" alt="4"/></div>
+			  <div class="list"><img src="images/5.jpg" alt="5"/></div>
+			  <div class="list"><img src="images/1.jpg" alt="1"/></div>       <!-- 方便实现无缝衔接跳转 -->
+         </div>
+        <div id="buttons">
+            <span index="1" class="on"></span>
+            <span index="2"></span>
+            <span index="3"></span>
+            <span index="4"></span>
+            <span index="5"></span>
+         </div>
+         <a href="javascript:;" id="prev" class="arrow">&lt;</a>
+         <a href="javascript:;" id="next" class="arrow">&gt;</a>
+        </div>
+    </div>
+
+<script>
+	var prev=document.getElementById("prev");			//左箭头
+	var next=document.getElementById("next");			//右箭头
+	var list=document.getElementById("list");			//5(7)张图片
+	var buttons=document.getElementById("buttons");		//所有小圆点
+	var imgwidth=list.children[0].offsetWidth;			//获取图片的宽度
+	var span=document.getElementById("buttons").getElementsByTagName("span");	//每一个单独的小圆点
+	var index=1;	//起始值为0，为衔接的开头的alt=5的图片
+	//被封装的函数实现下一张图片切换
+	
+	var Moving=false;//8、设定一个监控动画是否完成的监控器
+	gogogo=function(){
+		if(!Moving){	//8.1如果当前动画没有动了,上一个动画完成
+			Moving=true;		//8.2设置当前动画开始动
+			index++;
+			animate(list,{left:-600*index},function(){
+				if(index===6){					//1、设置当跳转到第一张alt=1,实现无缝轮播
+					list.style.left="-600px";		
+					index=1;
+				}
+				Moving=false;//8.3animate结束当前动画停止动
+			});
+			spanchange();
+		}
+		
+	};
+	//被封装的函数实现上一张图片切换
+	before=function(){
+		if(!Moving){	//8.1如果当前动画没有动了,上一个动画完成
+			Moving=true;		//8.2设置当前动画开始动
+			index--;
+			animate(list,{left:-600*index},function(){
+				if(index==0){				//当index减到0的时候跳转到后面alt=5的图片
+					list.style.left="-3000px";
+					index=5;				//把当前的index改为5
+				}
+				Moving=false;//8.3animate结束当前动画停止动
+			})
+			spanchange();
+		}
+	};
+	
+	//1、打开定时器
+	var timer=setInterval(
+			// 	function(){			//打开定时器
+			// 	index++;
+			// 	animate(list,{left:-600*index},function(){
+			// 		if(index===6){					//1、设置当跳转到第一张alt=1,实现无缝轮播
+			// 			list.style.left="-600px";		
+			// 			index=1;
+			// 		}
+			// 	});
+			// },			<=================被函数gogogo()封装了
+		gogogo,1000)
+	
+	//2、鼠标移动到container上停止轮播,清空定时器
+	container.onmouseover=function(){
+		clearInterval(timer);
+	}
+	//3、鼠标移动到container上开始轮播,打开定时器,并且封装函数gogogo
+	container.onmouseout=function(){
+		timer=setInterval(gogogo,1000)
+	}
+	//4、右箭头点击,下一张
+	next.onclick=gogogo;
+	
+	//5、左箭头点击,上一张与向下一张的逻辑相反
+	prev.onclick=before;			//创建封装函数before
+		
+	
+	//6、小圆点点击跳到对应图
+	for(var i=0;i<span.length;i++){
+		span[i].idx=i;			//把小圆点的下标存储起来为idx,注意对象是span没哟个小圆点
+		span[i].onclick=function(){
+			index=this.idx+1;
+			animate(list,{left:-600*index});
+			spanchange();
+		}
+	}
+
+	//7、小圆点点击样式改变,注意要把函数放在gogogo，before里面
+	function spanchange(){
+		//7.2要给圆点清空样式,暴力全部清空
+		for(var i=0;i<span.length;i++){
+			span[i].className="";
+		}
+		// 7.1 span[index-1].className='on';		//图片索引值=圆点索引值+1,但img索引值为6时要设置小圆点索引为0
+		
+		if(index==6){
+			span[0].className='on';
+		}else if(index==0){
+			span[4].className='on';
+		}
+		else{
+			span[index-1].className='on';
+		}
+		
+	}
+	
+	
+	
+	
+</script>
+</body>

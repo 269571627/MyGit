@@ -1,0 +1,24 @@
+起步：
+
+安装：
+npm install -g @vue/cli
+# OR
+yarn global add @vue/cli
+
+创建一个项目：
+vue create my-project
+# OR
+vue ui
+
+检查其版本
+vue --version
+
+创建项目
+vue create xxx
+
+启动项目
+cd xxx
+npm run serve
+
+打包
+npm run build

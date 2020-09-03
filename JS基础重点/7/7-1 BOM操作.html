@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7-1 BOM操作</title>
+</head>
+<body>
+    <p>
+        知识点：
+        navigator(浏览器)、screen、location、history
+    </p>
+    <script>
+
+        //navigator
+        const ua = navigator.userAgent
+        console.log("浏览器信息",ua)
+        
+
+
+        //screen
+        console.log("width",screen.width)
+        console.log("height",screen.height)
+
+
+
+        //location
+
+        //整个url
+        console.log(location.href)
+
+        //域名
+        console.log(location.host)
+
+        //http或https
+        console.log(location.protocol)
+
+        //路径
+        console.log(location.pathname)
+
+        //查询参数
+        console.log(location.search)
+
+        //哈希
+        console.log(location.hash)
+
+
+        //history
+        history.back()
+        history.forward()
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ajax</title>
+</head>
+<body>
+    <script>
+        //手写XMLHttpRequest发起请求
+        const xhr = new XMLHttpRequest()
+        console.log("xhr",xhr)
+        xhr.open('GET','/9/9-1 data.json',true)
+        console.log(xhr.readyState)
+        xhr.onreadystatechange = function () {
+            console.log(xhr.readyState)
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    alert(xhr.responseText)
+                    console.log(JSON.parse(xhr.responseText))
+                }else{
+                    console.log("error")
+                }
+            }
+        }
+        xhr.send(null)
+
+
+        xhr.open('POST','/login',true)
+        xhr.onreadystatechange = function () {
+            if(xhr.readyState === 4){
+                if(xhr.status === 200){
+                    alert(xhr.responseText)
+                    console.log(JSON.parse(xhr.responseText))
+                }else{
+                    console.log("error")
+                }
+            }
+        }
+        const postData = {
+            name:"xxx",
+            password:"123"
+        }
+        xhr.send(JSON.stringify(postData))
+    </script>
+</body>
+</html>

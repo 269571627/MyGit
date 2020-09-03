@@ -1,0 +1,186 @@
+<style>
+	*{
+		border: none;
+		font-family: "Open Sans",sans-serif;
+		margin: 0;
+		padding: 0;
+	}
+	
+	form{
+		background: #495678;
+		box-shadow: 4px 4px #3d4a65;
+		margin: 40px auto;
+		padding: 40px 0 30px 40px;
+		width: 17.5rem;
+	}
+	
+	.num{
+		outline: none;
+		cursor: pointer;
+		font-size: 1.25rem;
+		height: 45px;
+		margin: 5px 0 5px 0.625rem;
+		width: 45px;
+	}
+	.num:first-child{
+		margin: 5px 0 5px 10px;
+	}
+	.num,#display,form{
+		border-radius: 25px;
+	}
+	
+	#display{
+		outline: none;
+		background: #98d1dc;
+		box-shadow: inset 6px 6px 0px #3facc0;
+		color: #dededc;
+		font-size: 1.25rem;
+		height: 2.9375rem;
+		text-align: right;
+		width: 7.1875rem;
+		padding-right: 0.625rem;
+		margin-left: 0.3125rem;
+	}
+	.num{
+		background-color: #72778b;
+		box-shadow: 0 5px #5f6680;
+		color: #dededc;
+	}
+	.num:active{
+		box-shadow: 0 2px #5f6680;
+	}
+	.do{
+		background: #dededc;
+		box-shadow: 0 5px #bebebe;
+		color: #72778b;
+	}
+	.do:active{
+		box-shadow: 0 2px #bebebe;
+	}
+	
+	.oth{
+		background: #e3b44c;
+		box-shadow: 0 5px #e76a3d;
+		color: #DEDEDC;
+	}
+	
+	.oth:active{
+		box-shadow: 0 2px #e76a3d;
+	}
+	
+	
+</style>
+
+<html>
+	<head>	
+	</head>
+	
+	<body>
+		<form>
+			<input type="botton" class="num oth" id="nclear" value="  C"/>
+			<input type="botton" class="num oth" id="ndelete" value="  D"/>
+			<input type="text" id="display" />
+			
+			<br />
+			
+			<input type="button" class="num" value="7" onclick="get(this.value)" />
+			<input type="button" class="num" value="8" onclick="get(this.value)" />
+			<input type="button" class="num" value="9" onclick="get(this.value)" />
+			<input type="button" class="num do" value="+" onclick="get(this.value)" />
+			
+			<br />
+			
+			<input type="button" class="num" value="4" onclick="get(this.value)" />
+			<input type="button" class="num" value="5" onclick="get(this.value)" />
+			<input type="button" class="num" value="6" onclick="get(this.value)" />
+			<input type="button" class="num do" value="-" onclick="get(this.value)" />
+			
+			<br />
+			
+			<input type="button" class="num" value="1" onclick="get(this.value)" />
+			<input type="button" class="num" value="2" onclick="get(this.value)" />
+			<input type="button" class="num" value="3" onclick="get(this.value)" />
+			<input type="button" class="num do" value="*" onclick="get(this.value)" />
+			
+			<br />
+			
+			<input type="button" class="num" value="0" onclick="get(this.value)" />
+			<input type="button" class="num do" value="." onclick="get(this.value)" />
+			<input type="button" class="num do" value="/" onclick="get(this.value)" />
+			<input type="button" class="num oth" value="=" id="plass" />
+			
+		</form>
+		<p align="center" id="time"></p>
+		
+	</body>
+	
+    <script>
+		
+	  //显示字符串
+      var show=document.getElementById("display");
+	  var last=document.getElementById("plass")
+	  function get(things){
+		  show.value+=things;
+	  }
+	  
+	  //清空
+	  var n_clear=document.getElementById("nclear")
+	  function clear(){
+		  document.getElementById("display").value="";
+	  }
+	  n_clear.addEventListener("click",clear);
+	 
+	 //回删
+	 var n_del=document.getElementById("ndelete");
+	 function dele(){
+		 show.value=show.value.substring(0,show.value.length-1);
+	 }
+	 n_del.addEventListener("click",dele);
+	 
+	 //计算处理函数
+	var do_it=document.getElementById("plass");
+	function gan(){
+		var result=0;
+		result=document.getElementById("display").value;
+		document.getElementById("display").value=eval(result);
+	}
+	do_it.addEventListener("click",gan);
+	
+	
+	
+
+	function showTime(){
+		var today=new Date();
+		var y=today.getFullYear();
+		var m=today.getMonth()+1;
+		var d=today.getDate();
+		var h=today.getHours();
+		var f=today.getMinutes();
+		var s=today.getSeconds();
+		f=check(f);
+		s=check(s);
+		
+		var week=today.getDay()
+		var w=new Array("星期天","星期一","星期二","星期三","星期四","星期五","星期六");
+			document.getElementById("time").innerHTML=y+"年"+m+"月"+d+"日"+"</br>"+h+"："+f+"："+s+" "+w[week];
+		
+		setTimeout("showTime()",1000);
+		
+	}
+
+	
+	function check(i){
+		if(i<10){
+			i="0"+i;
+		}
+		return i;
+	}
+	
+	window.onload=function(){
+		showTime();
+	};
+	
+ 
+	</script>
+		
+</html>

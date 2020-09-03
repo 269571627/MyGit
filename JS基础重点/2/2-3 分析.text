@@ -1,0 +1,14 @@
+2-3
+字符串拼接
+
+==和===
+==:能发生转换之后能相等
+除了 ==null 之外，其他一律用===
+详情参考：https://blog.csdn.net/chenchunlin526/article/details/78850171
+
+if语句和逻辑运算
+truly变量 : !!a === true
+falsely变量 : !!b === false
+除以下情况其余都为truly变量：
+!!0 === false
+NaN '' null undefined false

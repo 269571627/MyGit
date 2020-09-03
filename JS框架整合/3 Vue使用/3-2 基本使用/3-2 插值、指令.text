@@ -1,0 +1,14 @@
+3-2 TplDemo
+指令、插值知识点：
+
+插值、表达式
+文本插值：{{message}}
+表达式插值：{{ flag ? 'yes' , 'no' }}
+
+指令、动态属性:
+绑定:id='xxx',在data中传值{{xxx}}
+
+v-html:有XSS风险，会覆盖子组件
+v-html='xxx',在data中传值{{xxx}},可使用`${Date.now()}`
+
+

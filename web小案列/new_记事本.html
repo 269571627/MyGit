@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>老曾的每日记事本</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+	
+    <style>
+		 body{
+            font-size: 20px;
+            background-color:rgb(231, 224, 214);
+        }
+        h1{
+            text-align: center;
+        }
+        .notS{
+            margin-right: 5px;
+            width: 15px;
+            cursor: pointer;
+        }
+        .selected{
+            display: none;
+            cursor: pointer;
+        }
+        #list{
+            width: 400px;
+            margin: 0 auto;
+        }
+        .detail{
+            border-radius: 10px;
+            padding: 10px;
+            margin:10px;
+            border: 1px solid rgb(190, 184, 184);
+        }
+        #inputV{
+            border-radius: 10px;
+            width: 375px;
+            margin:10px;
+            line-height: 40px;
+            outline: none;
+        }
+        #addB{
+            border-radius: 8px;
+            color: white;
+            background-color: rgb(104, 104, 196);
+            width: 100px;
+            height: 30px;
+            margin-left:280px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+   <h1>TODAY'S LIST</h1>
+   <div id="list">
+	   
+	   <div class="detail"><img src="https://static1.bcjiaoyu.com/f6c85f806f731822dd16c38c3dc3dfce_g.png-202x200" class="notS">
+	  变优秀</div>
+	   <div class="detail"><img src="https://static1.bcjiaoyu.com/f6c85f806f731822dd16c38c3dc3dfce_g.png-202x200" class="notS">
+	   更努力</div>
+	   <div class="detail"><img src="https://static1.bcjiaoyu.com/f6c85f806f731822dd16c38c3dc3dfce_g.png-202x200" class="notS">
+	   赚大钱</div>
+	   
+	   <div id="add">
+		   <input type="text" placeholder="    +   今日任务" id="inputV"/>
+		   <input type="button" value="一个字 干!" id="addB" />
+	   </div>
+   </div>
+    <script>
+		$(function(){
+				function line(){
+					$(".notS").on("click",function(){
+						$(this).attr("src","https://static1.bcjiaoyu.com/70d43381cb948313baa40dabd2e6235c_v.png-200x200");
+						$(this).parent().css({
+							"text-decoration":"line-through",
+							"color":"grey"
+						});
+					});
+					
+				}
+				
+				line();
+				
+				$('#addB').on('click',function(){
+					var v=$('#inputV').val();
+					var $checkC=$('<img src="https://static1.bcjiaoyu.com/f6c85f806f731822dd16c38c3dc3dfce_g.png-202x200" class="notS"> ')
+					var $newDiv=$('<div class="detail"></div>').text(v);
+					
+					$newDiv=$newDiv.prepend($checkC);
+					$('#add').before($newDiv);
+					
+					$('#inputV').val(null);
+					line();
+				})
+		})
+       
+    </script>
+</body>
+</html>
+
+
+

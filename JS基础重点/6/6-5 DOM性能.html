@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-5 DOM性能</title>
+</head>
+<body>
+    <p>对dom查询做缓存</p>
+    <p>对dom查询做缓存</p>
+    <p>对dom查询做缓存</p>
+    <p>对dom查询做缓存</p>
+    <p>对dom查询做缓存</p>
+
+    <ul id="list"></ul>
+
+    <script>
+        //对dom查询做缓存，缓存了plist.length
+        const plist = document.getElementsByTagName('p')
+        for(let i = 0; i<plist.length;i++){
+            plist[i].addEventListener('click',function(){
+                alert(i);
+            })
+        }
+
+        //频繁操作改为一次性操作
+        const listNode = document.getElementById('list')
+
+        //创建一个文档片段此时还没有插入到文档树中
+        const log = document.createDocumentFragment()
+
+        //执行插入
+        for(let j = 0; j<10; j++){
+            const li = document.createElement('li')
+            li.innerHTML = "LIST ITEM IS "+j
+            log.appendChild(li)
+        }
+
+        //都完成再执行插入
+        listNode.appendChild(log)
+    </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-4 手写apply函数</title>
+</head>
+
+<body>
+    <script>
+        function fn1(a, b, c) {
+            console.log("this", this)
+            console.log("a,b,c", a, b, c)
+            return this
+        }
+        fn1.apply({ x: 777 }, [1, 2, 3])
+
+        Function.prototype.myapply = function (context) {
+            if (typeof context === 'undefined' || context === null) {
+                context = window
+            }
+            context.fn = this
+            console.log("this",context.fn)
+
+            let args = arguments[1]
+            console.log("args:",args,...args)
+            let result
+            if (args) {
+                result = context.fn(...args)
+                console.log("result1",result)
+            } else {
+                result = context.fn()
+                console.log("result2",result)
+            }
+            delete context.fn
+            
+            return result
+        }
+
+        fn1.myapply({ x: 123 }, ['x', 'y', 'z'])
+    </script>
+</body>
+
+</html>

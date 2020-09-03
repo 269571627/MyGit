@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<!-- 实现搜索或者直接点击播放歌曲，列表li会自动定位到播放歌曲，样式改变。 -->
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			body{
+				background-image: url(bg.jpg);
+			}
+			#app{
+				text-align: center;
+				margin-top: 20px;
+			}
+			.po{
+				display: inline-block;
+			}
+			ul{
+				list-style:lower-roman;
+			}
+			ul li{
+				color: burlywood;
+			}
+			 .active{
+				border-bottom: antiquewhite;
+				color: black;
+			}
+			.btn {
+				display: inline-block;
+				line-height: 1;
+				white-space: nowrap;
+				cursor: pointer;
+				background: #fff;
+				border: 1px solid #dcdfe6;
+				color: #606266;
+				-webkit-appearance: none;
+				text-align: center;
+				box-sizing: border-box;
+				outline: none;
+				margin: 0;
+				transition: .1s;
+				font-weight: 500;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-ms-user-select: none;
+				padding: 12px 20px;
+				font-size: 14px;
+				border-radius: 4px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<div class="po">
+				<input type="text" v-model="msg" @input="changeMsg(msg)"/>
+				<button class="btn" @click="btnClick">播放</button>
+				<p>搜索播放：{{msg}}</p>
+				<audio autoplay controls :src="getSrc"></audio>
+				<ul>
+					<li v-for="(item,index) in musicList" @click="getIndex(index)" :class='{active:index == clickIndex}'>
+						<h3>歌曲名字：{{item.name}}</h3>
+						<h4>歌手：{{item.player}}</h4>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+		<script type="text/javascript">
+			var musicList = [
+				{ name:"没有理由" , player:"永彬Ryan" , src:'music1.mp3'},
+				{ name:"心似烟火" , player:"陈一千" , src:'music2.mp3'}
+			]
+			
+			new Vue({
+				el:"#app",
+				data(){
+					return{
+						musicList:musicList,
+						clickIndex:0,
+						msg:"",
+						src:""
+					}
+				},
+				computed:{
+					setSrc:{
+						set:function(newV){
+							console.log(newV);
+							this.clickIndex = newV
+						}
+					},
+					getSrc:function(){
+						
+						return this.musicList[this.clickIndex].src
+
+						
+					}
+				},
+				methods:{
+					getIndex(index){
+						this.clickIndex = index
+					},
+					changeMsg(msg){
+						this.msg = msg
+					},
+					btnClick(){
+						console.log(this.msg);
+						var flag = 0;
+						for(var i = 0; i < this.musicList.length; i++){
+							if(this.msg == this.musicList[i].name){
+								this.setSrc = i
+								flag = 1;
+							}
+						}
+						if(flag == 0){
+							alert("没有该歌曲")
+						}
+					}
+				}
+			})
+		</script>
+</html>

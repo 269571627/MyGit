@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>隐式原型和显示原型</title>
+</head>
+<body>
+    <script src="3-2 class.js"></script>
+    <script>
+        //隐式
+        console.log(xialuo.__proto__)
+
+        //显式
+        console.log(Student.prototype)
+
+        //true
+        console.log(xialuo.__proto__ === Student.prototype)
+
+        //true
+        console.log(Student.prototype.__proto__ === People.prototype)
+    </script>
+</body>
+</html>

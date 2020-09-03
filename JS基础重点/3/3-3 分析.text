@@ -1,0 +1,17 @@
+instanceof 类型判断、类判断
+
+//类和继承的本质
+
+原型关系
+每个class都有显式原型prototype
+每个实例都有隐式原型__proto__
+实例的隐式原型都指向对应class的显式原型
+
+基于原型的执行规则
+获取属性或方法时，现在自身属性方法中查找，找不到则自动去__proto__查找，
+又可对应到class的显式原型中。
+
+Object.prototype.hasOwnProperty('hasOwnProperty')//true
+
+instanceof 原理
+顺着隐式原型向上找能找到对应的显式原型则成立

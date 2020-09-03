@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-4 promise加载img</title>
+</head>
+
+<body>
+    <script>
+        function loadImg(src) {
+            const p = new Promise((resolve, reject) => {
+                const img = document.createElement('img')
+                img.onload = () => {
+                    resolve(img)
+                }
+                img.onerror = () => {
+                    const err = new Error(`图片加载失败 ${src}`)
+                    reject(err)
+                }
+                img.src = src
+            })
+            return p
+        }
+
+        const url = 'https://s3.pstatp.com/aweme/resource/web/static/image/index/logo_b7a2aca.png'
+        const url2 = "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png"
+
+        loadImg(url).then(img => {
+            console.log(img.width)
+            return img
+        }).then(img => {
+            console.log(img.height)
+            return loadImg(url2)
+        }).then(img2 =>{
+            console.log(img2)
+        }).catch(err => console.error(err))
+    </script>
+</body>
+
+</html>

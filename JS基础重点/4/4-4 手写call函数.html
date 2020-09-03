@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-4 手写call函数</title>
+</head>
+
+<body>
+    <script>
+        function fn1(a, b, c) {
+            console.log("this", this)
+            console.log("a,b,c", a, b, c)
+        }
+
+        fn1.call({ x: 99 }, 1, 2, 3)
+
+        //模拟call
+        Function.prototype.mycall = function () {
+            let args = Array.prototype.slice.call(arguments)
+
+            let t = args.shift()
+
+            let self = this
+
+            console.log("self,t,args",self,t,args)
+            
+            return self.apply(t,args)
+        }
+
+        fn1.mycall({ x: 110 }, 'xxx', 'yyy', 'zzz')
+
+    </script>
+</body>
+
+</html>

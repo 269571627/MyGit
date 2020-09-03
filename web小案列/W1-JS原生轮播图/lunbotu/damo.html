@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>damo</title>
+		<style>
+			#box{
+				width: 100px;
+				height: 100px;
+				position: absolute;
+				left: 600px;
+				background-color: red;
+			}
+		</style>
+		
+
+	</head>
+	<body>
+		<div id="box"></div>
+	</body>
+	
+	<script>
+		var box=document.getElementById("box")
+		box.onclick=function(){
+			var timer=setInterval(function(){  
+				//鼠标点击打开定时器
+				
+				//匀速
+				// var now=parseInt(getStyle(box,'left'));//注意转化为整型
+				// console.log(now); 			//查看是否获取到left值
+				// if(now==100){
+				// 	clearInterval(timer)			//	清空定时器
+				// }else{
+				// 	box.style.left=now+1+"px";
+				// }
+				
+				//变速
+				var now=parseInt(getStyle(box,'left'))
+				// var speed=Math.ceil((500-now)/6);		//第一步优化向下取整,万一除不尽就一直到不了500(从左往右)
+				//进而优化从右往左
+				var speed=(333-now)/6;
+				if(speed>0){
+					speed=Math.ceil(speed);
+				}else{
+					speed=Math.floor(speed);
+				}
+				if(now==333){
+					clearInterval(timer);
+				}else{
+					box.style.left=now+speed+'px';
+				}
+				console.log(now)
+			},300)
+		}
+		
+		function getStyle(obj,attr){			//获取样式
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}
+			else{
+				return obj.getComputedStyle(obj,null)[attr]
+			}
+		}
+		
+	</script>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+		<link rel="stylesheet" href="myweb.css"/>
+		<script src="myweb.js"></script>
+		<title>租房系统|首页</title>
+	</head>
+	<body>
+		
+	<div id="menuBtn"><img src="images/image.png"></div>
+	
+	<div id="menu">
+		<div class="b1">
+			<ul>
+				<li>
+					<a href="web.html">首页</a>
+				</li>
+				
+				<li>
+					<a href="userdetail.html">个人中心</a>
+				</li>
+				
+				<li>
+					<a href="housedetail.html">View more</a>
+				</li>
+				
+				<li>
+					<a href="renthouse.html">我的租房信息</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+	
+	 <div class="slider">
+		 <!-- 轮播图 -->
+        <ul class="main">
+            <li class="slider-pics"><a href="#"><img src="images/a1.jpg"></a></li>
+            <li class="slider-pics"><a href="#"><img src="images/a2.jpg"></a></li>
+            <li class="slider-pics"><a href="#"><img src="images/a4.jpg"></a></li>
+            <li class="slider-pics"><a href="#"><img src="images/a3.jpg"></a></li>
+        </ul>
+		
+        <div id="text">
+            <p>HOUSE RENT</p>
+            <p>JUST DO IT! EVERYTHING IS POSSIBLE!</p>
+            <div id="exploreBtn"><a href="housedetail.html">View more</a></div>
+        </div>
+		
+        <div class="slider-circle">
+            <ul class="slider-nav">
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+            </ul>
+        </div>
+		
+        <div class="slider-button">
+            <a href="#" class="slider-pre"><</a>
+            <a href="#" class="slider-next">></a>
+        </div>
+    </div>
+	
+	 <div id="middle">
+        <div id="leftText">
+            <h2 id="housenumber2"></h2>
+            <div id="detailText">From a remote, idyllic 
+                island to the world's design capital, 
+                these destinations have never been better. 
+                Start planning your 2018 travel now.
+            </div>
+        </div>
+        <p id="name">The best place</p>
+        <div id="view"><a href="housedetail.html">View more</a></div>
+        <img src="images/right.png" id="rightImg">
+		
+    </div>
+	
+	
+	
+	 <div id="detailImg">
+        <a href="housedetail.html"><img src="images/f.jpg" class="smallImg"></a>
+        <a href="housedetail.html"><img src="images/b.jpg" class="smallImg"></a>
+        <a href="housedetail.html"><img src="images/c.jpg" class="smallImg"></a>
+        <a href="housedetail.html"><img src="images/d.jpg" class="smallImg"></a>
+        <div style="clear: both"></div>
+    </div>
+	
+	
+	
+	 <div id="contact">
+        <p>GET IN TOUCH WITH US</p>
+        <input type="text" id="email" placeholder="ENTER YOUR EMAIL">
+    </div>
+
+    <div id="bottom">
+        <ul>
+            <li><a href="web.html">首页</a></li>
+            <li><a href="userdetail.html">个人中心</a></li>
+            <li><a href="housedetail.html">View more</a></li>
+            <li><a href="renthouse.html">租房信息</a></li>
+        </ul>
+    	<div class="bottom-contact">
+    		<p>联系我们</p>
+    		<p>电话：028——6066503</p>
+    		<p>地址：四川省成都市郫都区红光镇小学</p>
+    	</div>
+    	
+    </div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var housenumber2 = $('#housenumber2');
+			var count = $('#detailText');
+			
+			// housenumber2.html("我是标题");
+			// count.html("我是内容")
+			
+			$.ajax({
+				type:"GET",
+				url:"http://192.168.43.228:8080/house/list",
+				async:true,
+				data:{},
+				success:function (res) {
+					console.log("房屋信息",res.data);
+						 
+				}
+			
+			});
+		})
+	</script>
+	</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>修改个人信息</title>
+		<link rel="stylesheet" href="changeUserMesg.css">
+		<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+	</head>
+	<body>
+		<div class="div">
+			<div class="box">
+				<div class="box-one">
+					<div class="box-two">
+						<!--<label class="label">用户名</label>-->
+						<input type="text" class="input" name="usename" id="usename"  placeholder="用户名" />
+					</div>
+					<span id="usename_a"></span>
+				</div>
+				
+				
+				<div class="box-one">
+					<div class="box-two">
+						<!--<label class="label">邮箱</label>-->
+						<input type="text" class="input" name="postbox" id="postbox"  placeholder="邮箱" />
+		
+					</div>
+					<span id="postbox_a"></span>
+				</div>
+				<div class="box-one">
+					<div class="box-two">
+						<!--<label class="label">手机号码</label>-->
+						<!--<select name="" class="xiala">
+			<option value="">中国大陆  +86</option>
+			<option value="">中国香港特别行政区 +852</option>
+				<option value="">中国澳门特别行政区 +853</option>
+			<option value="+86">中国台湾地区 +886</option>
+		</select>-->
+						<input type="text" class="input" name="phone" id="phone" placeholder="电话号码" />
+					</div>
+		
+					<span id="phone_a"></span>
+				</div>
+				<div class="box-one">
+					<div class="box-two btn_one ">
+		
+						<input type="button" name="btn" id="btn" value="保存用户信息" />
+					</div>
+		
+				</div>
+			</div>
+		<script type="text/javascript">
+			$(function(){
+				$("#btn").click(function(){
+					var str = sessionStorage.obj;
+					var userid ="";
+					var id = "";
+					// var msg = sessionStorage.rent;
+						if(str==null){
+							window.location.href="index.html";
+						}else{
+							var obj = $.parseJSON(str);
+							// var rent = $.parseJSON(msg);
+							console.log("获取到的个人信息",obj)
+							userid = obj.data.id;
+							// console.log("获取到的租房信息",rent)
+							// $("#userName").html(obj.userInfo.userName);
+						}
+					console.log(userid);
+					
+					var num1 = 1;
+					//获取值
+					var usename = $("#usename").val();
+					var pas = $("#password").val();
+					var pas1 = $("#password1").val();
+					var postbox = $("#postbox").val();
+					var phone = $("#phone").val();
+		
+					var usename_a = $("#usename_a");
+					var pas_a = $("#password_a");
+					var pas1_a = $("#password1_a");
+					var aa = $("#password");
+					var postbox_a = $("#postbox_a");
+					var phone_a = $("#phone_a");
+					
+					if(usename.length == "0") {
+		
+						usename_a.innerText = "请输入用户名";
+						num1 = 0;
+		
+					} else {
+						usename_a.innerText = " ";
+					}
+					
+					
+					if(postbox.includes("@") != true) {
+						postbox_a.innerText = "邮箱格式不正确，请重新输入";
+						num1 = 0;
+					} else {
+						postbox_a.innerText = " ";
+					}
+					
+					if(postbox.length == "0") {
+						postbox_a.innerText = "请输邮箱账号";
+						num1 = 0;
+					}
+					
+					if(phone.length == "0") {
+						phone_a.innerText = "请输入手机号码";
+						num1 = 0;
+					} else {
+						phone_a.innerText = " ";
+					}
+					
+					if(num1 == 1) {
+					
+						console.log(usename,postbox,phone);
+						 
+						 $.ajax({
+							url: "http://192.168.43.228:8080/user/update",
+							type: 'put',
+							// JSON.stringify解决404错误请求
+							data: JSON.stringify({ 
+								id:userid,
+								username:usename,
+								telephone:phone,
+								email:postbox
+							}),
+							dataType: 'json',
+							contentType: 'application/json; charset=UTF-8',// 解决415错误
+							success: function (res) {
+								window.location.href="web.html";	
+								console.log(res);
+								alert("更改成功")
+							}
+						})
+				
+					   
+					}
+				})
+			})
+		
+		</script>
+	</body>
+</html>

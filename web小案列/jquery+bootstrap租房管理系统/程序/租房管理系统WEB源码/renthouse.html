@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>租房系统|租房详情</title>
+		
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<link rel="stylesheet" href="renthouse.css"/>
+		
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+		
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+		
+	</head>
+	<body>
+		<div class="text-center one_0">
+			<h1>租房信息</h1>
+			<p>JUST RENT IT —— ——</p>
+			<form class="form-inline">
+				<input type="email" class="form-control" size="50" placeholder="Email Address" style="margin-left: 35%;"/>
+				<button type="button" class="btn btn-danger">订阅</button>
+			</form>
+		</div>
+		<div class="container one">
+			<div class="row">
+				<div class="col-sm-8 two">
+					<h2 id="houseNumber"></h2>
+					<h4 id="creatTime"></h4>
+					<h4 id="price"></h4>
+					<h4 id="content"></h4>
+					<button class="btn btn-default btn-lg" style="border: 1px solid lightcyan;" id="btn_1">Rent out</button>
+				</div>
+				
+				<div class="col-sm-4">
+					<img src="img/daogou.jpg" class="img-responsive img-thumbnail center-block"/>
+				</div>
+			</div>
+			
+			<!-- <div class="row">
+				<div class="col-sm-4">
+					<img src="img/two_bg.jpg" class="img-responsive img-thumbnail center-block"/>
+				</div>
+				
+				<div class="col-sm-8 text-center" style="margin-top: 150px;">
+					<h2>W3322-10088</h2>
+					<h4>红光镇 32-64 全新</h4>
+					<h4>21000平米</h4>
+					<h4>小区位置，眼界开阔，空气清新。楼下有农业、建设、工商、中行、邮政等多家银行，24保安值班，有停车场，安全、环境方面自然没得说，附近就是商业街、麦当劳、超市、农贸市场，离公交、超市很近。非常适合在附近上班的人</h4>
+					<button class="btn btn-default btn-lg" style="border: 1px solid lightcyan;">Rent out</button>
+				</div>
+			</div>			 -->
+		</div>
+		
+		<div id="bottom">
+		    <ul>
+		        <li><a href="web.html">首页</a></li>
+		        <li><a href="userdetail.html">个人中心</a></li>
+		        <li><a href="housedetail.html">View more</a></li>
+		        <li><a href="renthouse.html">租房信息</a></li>
+		    </ul>
+			<div class="bottom-contact">
+				<p>联系我们</p>
+				<p>电话：028——6066503</p>
+				<p>地址：四川省成都市郫都区红光镇小学</p>
+			</div>
+			
+		</div>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var str = sessionStorage.obj;
+				var userid ="";
+				var id = "";
+				// var msg = sessionStorage.rent;
+					if(str==null){
+						window.location.href="index.html";
+					}else{
+						var obj = $.parseJSON(str);
+						// var rent = $.parseJSON(msg);
+						console.log("获取到的个人信息",obj)
+						userid = obj.data.id;
+						// console.log("获取到的租房信息",rent)
+						// $("#userName").html(obj.userInfo.userName);
+					}
+				console.log(userid);
+				$.ajax({
+					type:"GET",
+					url:"http://192.168.43.228:8080/renthouse/list",
+					async:true,
+					data:{userId:userid},
+					success:function (res) {
+						console.log("房屋信息",res.data);	
+						id = res.data.data["0"].id;
+						$('#houseNumber').html(res.data.data["0"].houseNumber);
+						$('#creatTime').html(res.data.data["0"].gmtCreate);
+						$('#price').html(res.data.data["0"].price);
+						$('#content').html(res.data.data["0"].content)
+					}
+				});
+				
+				$("#btn_1").on('click',function(){
+					$("#btn_1").removeClass("btn btn-default btn-lg");
+					$(this).addClass("over");
+					$("#btn_1").text("已退租");
+					
+					$.ajax({
+						type:"PUT",
+						url:"http://192.168.43.228:8080/renthouse/delete",
+						async:true,
+						data:{id:id},
+						success:function (res) {
+							console.log("房屋信息",res.data);
+							alert("退租成功")
+						}
+					});
+				})
+				
+			})
+		</script>
+	</body>
+</html>

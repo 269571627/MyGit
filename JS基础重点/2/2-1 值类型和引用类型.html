@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2-1 值类型和引用类型</title>
+</head>
+<body>
+    <script>
+        //值类型
+        let a = 100
+        let b = a
+        a = 200
+        console.log(b)  //100
+
+        //引用类型
+        let c = { age: 20 }
+        let d = c
+        c.age = 21
+        console.log(d.age) //99
+    </script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+3-2 条件渲染
+
+v-if v-else 的用法，可使用变量，也可使用===表达式
+
+v-if和v-show的区别
+v-if：
+只加载符合条件的，只渲染符合条件的
+
+v-show：
+<p style="display: none;">B v-show</p>
+
+v-if和v-show的使用场景
+频繁切换：v-show
+运行时很少改变：v-if

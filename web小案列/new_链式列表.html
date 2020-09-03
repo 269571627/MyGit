@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>橙旭园便利店</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <style>
+        body{
+            background: url(https://static1.bcjiaoyu.com/c2452c0fd9a6e8dfbe15f78a619afc20_x.jpg-4000x3000);
+            background-size: cover;
+        }
+        .name{
+            font-size:35px;
+            font-style: bold;
+            text-align: center;
+        }
+        a{
+            text-decoration: none;
+            color: rgb(100, 86, 86);
+        }
+        .category{
+            color: black;
+        }
+        .level2{
+            display: none;
+        }
+        div#wrapper {
+            overflow:auto;
+        }
+        div#sidebar {
+        color:#666666;
+        font-size:20px;
+        }
+        div#sidebar {
+        float:left;
+        width:400px;
+        background-color:#E8E8E8;
+        }
+        div#sidebar p {
+        padding:10px;
+        margin:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper"> 
+        <div id="sidebar">
+            <div class="name">橙旭园便利店</div>
+            <ul class="menu">
+                <li class="level1">
+                    <a href="#" class="category">美食</a>
+                    <ul class="level2">
+                        <li><a href="#">牛奶</a></li>
+                        <li><a href="#">柚子茶</a></li>
+                        <li><a href="#">酸梅汤</a></li>
+                        <li><a href="#">火腿</a></li>
+                        <li><a href="#">香肠</a></li>
+                        <li><a href="#">雪蛤</a></li>
+                        <li><a href="#">蜂蜜</a></li>
+                        <li><a href="#">红酒</a></li>
+                    </ul>
+                </li>
+                <li class="level1">
+                    <a href="#" class="category">生鲜</a>
+                    <ul class="level2">
+                        <li><a href="#">麻辣小龙虾</a></li>
+                        <li><a href="#">三文鱼</a></li>
+                        <li><a href="#">咸鸭蛋</a></li>
+                        <li><a href="#">牛肉</a></li>
+                        <li><a href="#">百香果</a></li>
+                        <li><a href="#">桃子</a></li>
+                        <li><a href="#">山竹</a></li>
+                        <li><a href="#">榴莲</a></li>
+                    </ul>
+                </li>
+                <li class="level1">
+                    <a href="#" class="category">零食</a>
+                    <ul class="level2">
+                        <li><a href="#">甜甜圈</a></li>
+                        <li><a href="#">芒果干</a></li>
+                        <li><a href="#">费列罗</a></li>
+                        <li><a href="#">果冻</a></li>
+                        <li><a href="#">冰皮月饼</a></li>
+                        <li><a href="#">薯片</a></li>
+                        <li><a href="#">豆干</a></li>
+                        <li><a href="#">开心果</a></li>
+                    </ul>
+                </li>  
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(".category").on('mouseover',function(){
+            $(this).next().show()
+            .parent().siblings().children("a")
+            .next().hide();
+        });
+    </script>
+</body>
+</html>

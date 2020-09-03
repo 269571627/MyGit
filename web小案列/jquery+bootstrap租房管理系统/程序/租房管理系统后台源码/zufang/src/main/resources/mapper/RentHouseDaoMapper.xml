@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wl.zufang.dao.RentHouseDao">
+
+    <insert id="insert" parameterType="com.wl.zufang.entity.RentHouse">
+        <selectKey keyProperty="id" order="AFTER" resultType="Long">
+            SELECT last_insert_id()
+        </selectKey>
+        insert into rent_house 
+        (user_id,house_id,house_number,price,duration,content,state)
+        values 
+        (#{userId},#{houseId},#{houseNumber},#{price},#{duration},#{content},'1')
+    </insert>
+    
+    <update id="delete" parameterType="long">
+        update rent_house set state = '0' where id = #{id}
+    </update>
+    
+    <select id="listAll" resultType="com.wl.zufang.entity.RentHouse">
+        select * from rent_house where user_id = #{userId} and state = '1'
+    </select>
+    
+    <select id="getById" parameterType="long" resultType="com.wl.zufang.entity.RentHouse">
+        select * from rent_house where id = #{id}
+    </select>
+</mapper>

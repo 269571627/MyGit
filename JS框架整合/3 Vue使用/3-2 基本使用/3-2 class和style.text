@@ -1,0 +1,8 @@
+class和style
+class使用动态属性设置类：
+:class="{}"  对象
+:class="[]"  数组
+
+:style="xxx"
+驼峰式写法（aB）
+xxx在data中直接设置样式{}的格式

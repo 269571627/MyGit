@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this</title>
+</head>
+<body>
+    <script>
+        const zhangsan = {
+            name:"张三",
+            sayHi(){
+                //指向zhangsan这个对象
+                console.log(this)
+            },
+            wait(){
+                setTimeout((function(){
+                    //指向window
+                    console.log(this)
+                }))
+            }
+        }
+
+        const zhangsan2 = {
+            name:"张三2",
+            sayHi(){
+                //指向zhangsan这个对象
+                console.log(this)
+            },
+            wait(){
+                setTimeout(() => {
+                    //this为当前对象（箭头函数的this取上级作用域的this）
+                    console.log(this)
+                })
+            }
+        }
+    </script>
+</body>
+</html>

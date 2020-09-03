@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+		<title>shoufenqing</title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				/* 1.背景图片添加 */
+				background: url(images/4.jpg) center top repeat;	
+				
+			}
+			
+			#wrap{
+				/* 2.设置盒子宽高居中 */
+				width: 1090px;
+				height: 500px;
+				margin: 150px auto;
+				border: 0px solid aliceblue;
+				/* 9、超出部分设置隐藏 */
+				overflow: hidden;
+			}
+			
+			/* 9、设置li的父元素为120%这样每个li就不会因为快速滑动掉下来,因为li为float */
+			#wrap ul{
+				width: 120%;
+			}
+			#wrap ul li{
+				/* 3、设置四个li的宽高样式 */
+				list-style: none;
+				/* 注意这里的宽度，手风琴嘛只留一点出来就好了 */
+				width: 100px;
+				height: 500px;
+				/* 4、设置浮动，就变成一排了 */
+				float: left;
+			}
+			
+			/* 6、 */
+			#wrap ul li .txt p{
+				/*6.1 更改p的样式 */
+				color: white;
+				/* 注意这里的宽度正好就是手风琴的那一点，7.1文字排成一竖排就可以不用宽高了注释掉 换成padding ，只能管前三张所以引入7 */
+				/* width: 100px; */
+				/* height: 500px; */
+				
+				/* 7.1 padding左右的值可以在chrom开发者工具调试,看什么时候成一竖排 */
+				padding: 10px 40px;
+				/* 7.2之后的字体大小,字体,背景都可以移到txt中 */
+			}
+			
+			/* 7、div class='txt'框好的p,把文字弄成一竖 */
+			#wrap ul li .txt{
+				
+				/* 7.2 从6移过来设定的 */
+				font-size: 14px;
+				font-family: "microsoft yahei";
+				/* 6.2的设定手风琴头部特定样式，最后一个值是透明度 */
+				background: rgba(0,0,0,0.5);
+				
+				color: white;
+				/* 7.3设定盒子宽高，这样第四张图的文字也出来啦 */
+				width: 100px;
+				height: 500px;
+				/* 7.4 设置超出部分隐藏 */
+				overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<ul>
+				<!-- 6、在li中间加点文字p并改样式 -->
+				<!-- 7、给p括个div，把文字弄成一竖 -->
+				<li style="background-image: url(images/1.jpg);">
+					<div class="txt">
+						<p>T老曾III III III III在线奋斗史</p>
+					</div>
+					
+				</li>
+				<li style="background-image: url(images/2.jpg);">
+					<div class="txt">
+						<p>H老曾III III III III在线奋斗史</p>
+					</div>
+					
+				</li>
+				<li style="background-image: url(images/3.jpg);">
+					<div class="txt">
+						<p>R老曾III III III III在线奋斗史</p>
+					</div>
+					
+				</li>
+				<!-- 5、把最后一张图变为789px -->
+				<li style="background-image: url(images/4.jpg); width: 789px;">
+					<div class="txt">
+						<p>EE老曾III III III III在线奋斗史</p>
+					</div>
+					
+				</li>
+			</ul>
+		</div>
+		<!-- 8、开始设置动态效果鼠标停在li上，图片宽度设置790px，其他100px -->
+		<script type="text/javascript">
+			$('#wrap ul li').hover(function(){
+				$(this).stop().animate({
+					width:"790px"
+				},500).siblings().stop().animate({
+					width:"100px"
+				},500);
+			});
+		</script>
+	</body>
+</html>

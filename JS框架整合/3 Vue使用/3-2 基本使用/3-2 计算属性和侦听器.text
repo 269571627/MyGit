@@ -1,0 +1,28 @@
+3-2 WatchDemo、ComputedDemo
+https://cn.vuejs.org/v2/guide/computed.html
+
+
+计算属性和侦听器知识点
+（computed和watch）
+
+computed有缓存，data不变则不会重新计算：
+这就意味着只要 num 还没有发生改变，
+多次访问 double1 计算属性会立即返回之前的计算结果，而不必再次执行函数。
+
+num值和双向数据绑定v-model
+初始值使用data中num
+计算值放在computed中,{{xxx}}可表示computed中的方法xxx(){...return...}
+
+双向绑定v-model='xxx'：
+在input中输入值改变num，从而改变其他显示
+xxx包含使用get(){return...}、set(){...}两个方法
+
+
+watch监听：
+v-model='xxx'
+
+watch如何深度监听:
+handler(){}且deep=true
+
+watch监听引用类型，拿不到oldVal
+原因是因为指针赋值，指向同一个地址。

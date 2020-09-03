@@ -1,0 +1,10 @@
+4-3
+
+this应用场景
+作为普通函数、使用call、apply、bind、作为对象方法被调用
+在class方法中调用，箭头函数
+
+this的值是在函数执行的时候确定的，不是在定义的时候确定的
+
+剖析call、apply、bind：
+https://www.runoob.com/w3cnote/js-call-apply-bind.html

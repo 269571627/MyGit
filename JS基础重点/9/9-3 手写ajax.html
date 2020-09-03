@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9-3 手写ajax</title>
+</head>
+
+<body>
+    <script>
+        function ajax(url) {
+            const p = new Promise((resolve, reject) => {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', url, true)
+                console.log(xhr.readyState)
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            resolve(JSON.parse(xhr.responseText))
+                        } else if (xhr.status === 404) {
+                            reject(new Error('404 not found'))
+                        }
+                    }
+                }
+                xhr.send(null)
+            })
+            return p
+        }
+
+        const url = '/9/9-1 data.json'
+        ajax(url).then(res=>{
+            console.log("ok",res)
+        }).catch(err=>{
+            console.error('no',err)
+        })
+    </script>
+</body>
+
+</html>

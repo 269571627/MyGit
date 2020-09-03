@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6-4 操作DOM结构</title>
+</head>
+<style>
+    .d1{
+        border: 1px solid red;
+    }
+    .d2{
+        margin-top: 30px;
+        border: 1px solid blue;
+    }
+</style>
+<body>
+    <div id="div1"></div>
+    <div id="div2">
+        <p id="p2">我是移动节点</p>
+    </div>
+    <script>
+        //获取节点
+        const div1 = document.getElementById('div1')
+        //增加节点
+        const p1 = document.createElement('p')
+        //写入内容
+        p1.innerHTML = '新增节点p1'
+        //插入节点
+        div1.appendChild(p1)
+
+        //移动节点
+        const p2 = document.getElementById('p2')
+        div1.appendChild(p2)
+
+        const dlist = document.querySelectorAll('div')
+        dlist[0].className = 'd1'
+        dlist[1].className = 'd2'
+
+        //获取子元素列表
+        const child = div1.childNodes
+        console.log("child",child)
+        //获取父元素
+        const father = p2.parentNode
+        console.log("father",father)
+
+        //删除子元素
+        div1.removeChild(child[0])
+    </script>
+</body>
+</html>

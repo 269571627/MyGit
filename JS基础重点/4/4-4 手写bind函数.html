@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4-4 手写bind函数</title>
+</head>
+
+<body>
+    <p>手写bind、apply、call可参考：https://www.jianshu.com/p/539064c644bb</p>
+    <script>
+        alert('bindDemo')
+        function fn1(a, b, c) {
+            console.log("this:", this)
+            console.log("a,b,c:", a, b, c)
+            return "this is fn1"
+        }
+        let fn2 = fn1.bind({ x: 100 }, 10, 20, 30)
+        let res = fn2()
+        console.log("res:", res)
+
+        //模拟bind
+        Function.prototype.mybind = function () {
+            //将参数拆解为数组，参数由arguments获取
+            let args = Array.prototype.slice.call(arguments)
+            console.log("args1:",args)
+            //获取this：数组第一项
+            let t = args.shift()
+            
+            const self = this
+            console.log("self:",self)
+            //返回一个函数
+            return function(){
+                console.log("args2:",args)
+                return self.apply(t,args)
+            }
+        }
+
+        let myfn = fn1.mybind({ x: 100 }, 10, 20, 30)
+        let myres = myfn()
+        console.log("myres:", myres)
+    </script>
+</body>
+
+</html>

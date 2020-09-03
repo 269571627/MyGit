@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8-1 事件绑定冒泡代理</title>
+</head>
+
+<body>
+    <button id="btn1">click</button>
+
+    <div id="div1">
+        <p id="p1">激活</p>
+        <p id="p2">取消</p>
+        <p id="p3">取消</p>
+        <p id="p4">取消</p>
+    </div>
+    <hr>
+    <div id="div2">
+        <p id="p5">取消</p>
+        <p id="p6">取消</p>
+    </div>
+    <hr>
+    <div id="div3">
+        <a href="#">a1</a>
+        <a href="#">a2</a>
+        <a href="#">a3</a>
+        <a href="#">a4</a>
+        <a href="#">a5</a>
+        <button type="submit">提交</button>
+    </div>
+
+    <script>
+        //通用事件绑定函数  普通
+        // function bindEvent(elem, type, fn) {
+        //     elem.addEventListener(type, fn)
+        // }
+
+        //通用事件绑定函数  深度
+        function bindEvent(elem, type, selector, fn) {
+            if (fn == null) {
+                fn = selector
+                selector = null
+            }
+            elem.addEventListener(type, event => {
+                const target = event.target
+                console.log("target",target)
+                if (selector) {
+                    //代理绑定
+                    if(target.matches(selector)){
+                        fn.call(target,event)
+                    }
+                } else {
+                    //普通绑定
+                    fn.call(target,event)
+                }
+            })
+        }
+
+        const btn1 = document.getElementById('btn1')
+        bindEvent(btn1, 'click', function(event){
+            // console.log(event.target)
+            //阻止默认行为
+            event.preventDefault()
+            // alert('click')
+            console.log(this.innerHTML)
+        })
+
+
+
+        //事件冒泡
+        const p1 = document.getElementById('p1')
+        const div2 = document.getElementById('div2')
+        const body = document.body
+        bindEvent(p1, 'click', event => {
+            //阻止往上冒泡
+            event.stopPropagation()
+            alert('激活')
+        })
+        bindEvent(body, 'click',function(event){
+            console.log('bodyclick', event.target)
+            alert('取消')
+        })
+        bindEvent(div2, 'click',function(event){
+            console.log('div2', event.target)
+            alert('取消')
+        })
+
+
+        //事件代理，子元素不方便绑定事件则绑定在父元素上操作
+        //代码简洁，减少浏览器内存占用，不可滥用
+        const div3 = document.getElementById('div3')
+        bindEvent(div3, 'click', 'a',function(event){
+            event.preventDefault()
+            event.stopPropagation()
+            // const target = e.target
+            // console.log(target.nodeName,target.nodeType)
+            // if(target.nodeName === 'A'){
+            //     console.log(target.innerHTML)
+            // }
+            console.log(this.innerHTML)
+        })
+    </script>
+</body>
+
+</html>

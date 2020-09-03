@@ -1,0 +1,15 @@
+6-3 页面渲染 css
+
+property:修改对象属性，不会体现到html中
+attribute：修改html属性，会改变html结构
+两者都有可能引起dom重新渲染
+
+
+getElementById
+getElementsByTagName
+getElementsByClassName
+querySelectorAll
+
+
+setAttribute
+getAttribute
