@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1.字符串查重</title>
+</head>
+<style>
+    pre{
+        font-size: 18px;
+        font-weight: bold;
+    }
+</style>
+<body>
+    <pre>
+        实现一个算法，确定一个字符串 s 的所有字符是否全都不同。
+        示例 1：
+        输入: s = "leetcode"
+        输出: false 
+        
+        提示：
+        方法一：双重循环
+        方法二：数组set方法去重
+        方法二提示：Set和Map类似，也是一组key的集合，但不存储value。
+        由于key不能重复，所以，在Set中，没有重复的key。
+    
+        split 字符串方法，splice、slice 数组方法
+        1、split()  返回一个字符串数组。
+
+        2、splice() 返回被删除的元素组成的数组 
+        即 如果使用arr = arr.splice()的方法将会返回一个被截取的部分，
+        而arr.splice()后再调用arr将会返回一个截取后的新数组。
+
+        3、slice() 返回一个新的数组，
+        包含从 start 到 end （不包括该元素）的 arrayObject 中的元素。
+    </pre>
+    <script>
+        //方法一
+        // var isUnique = function(astr) {         
+        //     for(let i = 0;i<astr.length;i++){
+        //         for(let j = i+1;j<astr.length;j++){
+        //             if(astr[i] == astr[j]){
+        //                 return false
+        //             }
+        //         }
+        //     }
+        //     return true
+        // };
+        
+        //方法二
+        var isUnique = function(astr) {  
+            let s = new Set(astr.split(''))  
+            //可以查看到set原型中没有length
+            console.log(s,s.length,s.size)
+
+           return new Set(astr.split('')).size === astr.length
+        };
+    </script>
+</body>
+</html>

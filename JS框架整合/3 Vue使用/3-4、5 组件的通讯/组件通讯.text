@@ -1,0 +1,184 @@
+Vue组件知识点 VueComponentsDemo
+
+
+挂载：
+Vue实例通过Vue开发单页面项目，一个项目就是一个Vue实例（暂且这么理解吧），也就是通过new Vue()语句创建的对象。
+那么既然有了一个实例，那么要显示出来，就得放入HTML文档中，这就是挂载。
+
+组件通讯：
+
+
+父组件：index
+子组件：input、list
+孙子组件：listson
+
+
+父===>子
+provide和inject
+
+父<===>子
+props和$emit
+$children和$parent
+
+兄弟<===>兄弟
+$emit和$on及$off
+
+
+爷爷<===>子子孙孙
+$attrs和$listeners及$emit
+
+
+
+【1】props和$emit
+子=====>父
+
+（1）子组件的input通过v-model双向绑定数据，
+ <input type="text" id="title" v-model="title">
+
+（2）子组件内改变的数据在方法中通过this.$emit('父组件内接收的自定义的事件名',传递的值)进行传递
+this.$emit('fatherToDo','this.name')
+
+（3）父组件通过在子组件上@接受的自定义的事件名="进行数据处理的方法"绑定事件，
+<Input @fatherToDo="fatherToDoFn"/>
+
+（4）在方法中接收传来的参数进行数据处理
+fatherToDoFn(name){
+    console.log("接收到的name",name)
+}
+
+
+父=====>子
+
+（1）父组件在子组件上动态绑定（:）自定义属性="要传的data中的数据/其他数据"
+<List :sendDataToSon="list" />
+
+（2）子组件在props中接收
+两种书写方式：
+【1】props:['sendDataToSon']
+【2】props:{
+    sendDataToSon:{
+        type:Array,
+        default(){
+            return[]
+        }
+    }
+}
+推荐第二种可以书写它的类型和默认值。
+
+
+
+
+
+
+【2】provide和inject
+父======>子
+父组件provide：提供变量
+provide: {
+    foo: "provide 子传孙",
+},
+
+子组件inject：注入变量
+inject: ["foo"]
+
+created() {
+    this.msg = this.foo;
+},
+
+
+
+
+
+【3】$children和$parent
+父======>子
+父级加一个点击事件xxx,传sonInputMsg值
+xxx(){
+    this.$children[0].indextoinputmsg = this.sonInputMsg
+}
+
+子组件props的value接收
+props:{
+    value:{
+        type:String
+    }
+},
+data中： indextoinputmsg:this.value
+渲染：<p>爸爸给的值：{{indextoinputmsg}}</p>
+
+
+子=====>父
+ <input  @change="inputtoindex"/>
+inputtoindex(){
+    this.$parent.sonInputMsg = this.indextoinputmsg
+}
+
+
+
+
+
+【4】$emit和$on及$off
+子=====>子（兄弟）
+（1）兄弟A中event.$emit("兄弟B接收的自定义事件名",传递的值)
+event.$emit('sendBroTitle',this.title)
+
+（2）兄弟B中在mounted(){}中处理由event.$on("兄弟B接收的自定义事件名",“处理数据的方法名”)对事件进行绑定
+event.$on('sendBroTitle',this.broDoTitle)
+
+（3）再在methods调用方法接收参数处理数据
+broDoTitle(title){alert(title)}
+
+（4）兄弟B中注意及时解绑销毁，否则会造成内存泄漏
+event.$off('sendBroTitle',this.broDoTitle)
+
+event是event.js内的Vue实例
+import Vue from 'vue'
+export default new Vue()
+
+
+
+
+
+【5】$attrs和$listeners及$emit
+多层通讯：
+
+【1】爷爷传给孙子或者孙子的孙子等等$attrs
+index-->list-->listson
+
+爷爷index：
+ <ListDemo :sendGrandF='grandf'/>
+ grandF:'爷爷找到孙子问要不要零花钱'
+ 注：这里sendGrandF不要用props接收了
+ $attrs是接收的是被props接收之外的数据。
+
+ 爸爸list：
+  <!-- $attrs相当于拿到了没有在props定义的sendGrandF值 -->
+<ListSonDemo v-bind="$attrs" />
+
+孙子listson：
+ <p>拿到的值：{{$attrs.sendGrandF}}</p>//'爷爷找到孙子问要不要零花钱'
+
+
+
+
+ 【2】孙子或孙子的孙子等等传给爷爷$listeners
+ listson-->list-->index
+
+ 孙子listson
+  <button @click="gsonMoney">点我向爷爷要零花钱</button>
+
+gsonMoney(){
+    this.$emit('gsMsg',"孙子找到爷爷要了5毛钱")
+}
+
+爸爸list
+<ListSonDemo v-on="$listeners"/>
+
+爷爷index：
+<List @gsMsg="getgsMsg">
+getgsMsg(msg){
+    alert(msg)//孙子找到爷爷要了5毛钱
+}
+
+
+
+
+

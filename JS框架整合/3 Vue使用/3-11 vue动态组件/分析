@@ -1,0 +1,9 @@
+3-11
+
+:is="component-name"用法
+
+组件类型不确定，需要根据数据，动态渲染的场景
+
+以引入NextTick组件为例
+
+<component :is="chooseNextTick" @addListItem="doAddtwo"></component>

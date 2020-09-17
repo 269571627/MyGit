@@ -1,0 +1,18 @@
+3-14
+
+多个组件有相同逻辑，抽离出来
+
+使用：
+import myMixIns from './myMixIns'
+
+mixins:[myMixIns],
+
+myMixIns多次复用
+
+
+缺点：
+代码来源不明确，不利于阅读
+
+多mixins容易造成命名冲突
+
+mixins和组件易出现多对多关系复杂度较高

@@ -22,3 +22,9 @@ npm run serve
 
 打包
 npm run build
+
+安装vuex
+vue add vuex
+
+安装vue-router
+npm install vue-router -S

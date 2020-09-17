@@ -1,0 +1,47 @@
+3-8
+自定义v-model
+
+【1】在父级导入的子组件中书写好v-model的形式
+{{name}}
+<Son v-model="name">
+data(){ return { name:''} }
+
+
+【2】在子组件中进行收发两个行为
+（1）收：接收父级v-model传来的name，定义为nameF
+props:{
+    nameF:{
+        type:String,
+        default(){
+            return ''
+        }
+    }
+}
+动态绑定输入框value值
+<input type="text" :value="nameF">
+
+
+（2）发：上面input基础上用$emit进行传值：$emit('方法名',传递的值)
+<input type="text" :value="nameF" @input="$emit('change',$event.target.value)">
+
+核心：定义model、:value="nameF" @input="$emit('change',$event.target.value)"、props:'nameF'
+model:{
+    prop:'nameF',//定义prop值,props规则
+    event:'change'//定义$emit事件名
+}
+
+
+
+$nextTick
+Vue是异步渲染：data改变之后，DOM不会立刻渲染
+$nextTick会在DOM渲染之后被触发，以获取最新DOM节点
+
+使用：
+this.$nextTick(()=>{
+    //获取DOM元素
+    const ulDom = this.$refs.xxx
+    （其中xxx是<ul ref='xxx'></ul>）
+    
+    //查看节点
+    console.log(ulDom.childNodes.length)
+})

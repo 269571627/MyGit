@@ -1,0 +1,28 @@
+3-3 事件 EventDemo
+
+methods:{}中定义方法
+
+event 参数，自定义参数：
+不带参数data中可直接接收addNum(event)
+<button @click="addNum">+1</button>
+
+带参数用$event传递，data中接收：subNum(val,$event)
+<button @click="subNum(1,$event)">-1</button>
+
+
+事件修饰符，按键修饰符
+
+事件修饰符参考：
+https://www.cnblogs.com/wasbg/p/11005915.html
+
+按键修饰符参考：
+https://www.cnblogs.com/junlinsky/p/12897806.html
+
+
+绑定标签上的属性（内置属性和自定义属性）
+v-bind:aaa='xxx'===>:aaa='xxx'
+
+:原事件名
+v-on:click='xxx'===>@click='xxx'
+
+【观察】事件被绑定到哪里？

@@ -1,0 +1,50 @@
+3-6生命周期
+官方文档：https://cn.vuejs.org/v2/api/#%E9%80%89%E9%A1%B9-%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90
+生命周期图示：
+https://www.cnblogs.com/zdz8207/p/vue-lifecycle.html
+https://upload-images.jianshu.io/upload_images/3698455-f5ef85fda6c584e1.png
+
+（1）单个组件
+初始化
+beforeCreate 在实例初始化之后
+created 在实例创建完成后被立即调用
+
+挂载
+beforeMount 在挂载开始之前被调用
+mounted 实例被挂载后调用
+
+更新
+beforeUpdate 数据更新时调用，发生在虚拟 DOM 打补丁之前。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
+updated 组件 DOM 已经更新，所以可以执行依赖于 DOM 的操作。要相应状态改变，通常最好使用计算属性或 watcher 取而代之。
+
+销毁
+beforeDestroy 实例销毁之前调用
+destroyed 实例销毁后调用。该钩子被调用后，对应 Vue 实例的所有指令都被解绑，所有的事件监听器被移除，所有的子实例也都被销毁。
+
+
+注意：created：vue实例已经初始化完了，页面还没渲染
+    mounted：页面已经渲染
+
+
+(2)多个组件：
+以3-4、5为例
+打印结果：
+index created 父
+input created 子
+list created
+
+input mounted 子
+list mounted 父
+index mounted
+
+index beforeUpdate 父
+input beforeUpdate 子
+list beforeUpdate
+
+list updated
+input updated 子
+index updated 父
+
+创建：从外到内
+渲染：从内到外
+

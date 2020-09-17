@@ -1,0 +1,25 @@
+3-3 ListDemo
+循环（列表）渲染
+
+如何遍历数组？
+ <li v-for="(item,index) in newArray" :key="item.id">
+newArray:[
+    {id:'01',name:'张三'},
+    {id:'02',name:'李四'},
+    {id:'03',name:'王二'}
+]
+
+
+如何遍历对象？
+（a,b,c相当于主键）
+<li v-for="(item,key,index) in newObj" :key="key">
+newObj:{
+    a:{title:'标题1'},
+    b:{title:'标题2'},
+    c:{title:'标题3'}
+}
+
+
+key的重要性
+
+v-for和v-if不能一起使用

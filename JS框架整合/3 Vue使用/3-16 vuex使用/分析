@@ -1,0 +1,194 @@
+3-16 vuex
+vuex依赖于vue
+Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则：
+
+应用层级的状态应该集中到单个 store 对象中。
+
+提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。
+
+异步逻辑都应该封装到 action 里面。
+
+
+
+基本概念、基本使用、api必须掌握
+
+可能会考察state的数据结构设计
+
+基本概念
+state 状态对应数据属性
+
+getters（可选）获取状态存储值
+
+mutations 修改状态state的唯一方法是提交mutations，但是mutations中的方法是同步的，故引出action
+
+actions 可以提交mutations
+[   Action 类似于 mutation，不同在于：
+    Action 提交的是 mutation，而不是直接变更状态。
+    Action 可以包含任意异步操作。
+]
+
+modules（可选）把上面四大将分开到各自文件
+
+
+相关计算属性：
+注：获取所有store内的信息都在computed中进行
+
+用于vue组件
+dispatch————在components点击某个按钮触发actions中声明的方法
+commit————actions提交mutations，从而改变state，渲染components
+mapState
+mapGetters
+
+mapActions
+mapMutations
+
+
+
+基本使用
+
+下载vuex
+vue add vuex 
+
+main.js全局引入store文件，并放在Vue实例中
+import store from './store'
+new Vue({
+    store
+})
+
+在store文件index中引入vue、vuex，并把vuex注入到vue中
+import Vue from 'vue'
+import Vuex from 'vuex'
+Vue.use(Vuex)
+
+抛出store
+export default new Vuex.Store({
+    state:{
+        //存数据，数组，对象等
+        count:1,
+        list:['a','b','c']
+    },
+    getters:{
+        //返回state数据
+        countg(state){
+            return state.count
+        },
+
+        //带参数
+        listg:(state)=>(i)=>{
+            return state.list[i]
+        }
+    },
+    mutations:{
+        //commit触发方法修改state值，同步
+    },
+    actions:{
+        //dispatch触发方法commit mutations中的方法 异步
+    }
+})
+
+
+
+
+
+
+数据获取：
+
+普通获取state、getters
+
+{{countGet}}
+{{countg}}
+
+computed:{
+    countGet(){
+        return this.$store.state.count;
+    }
+    countg(){
+        return this.$store.getters.countg
+    },
+    listg(){
+        return this.$store.getters.listg(2) //'c'
+    }
+}
+
+
+
+mapState获取state的几种获取方式代表：
+
+注使用mapxxx要import
+
+import {mapState、mapGetters} from 'vuex'
+
+computed:mapState({
+    //箭头函数
+    countGet:state=>state.count,
+
+    //字符串
+    countGet:'count'
+
+    //方法
+    countGet(state){
+        return state.count
+    }
+})
+
+
+
+mapstate的第二种书写：...mapState对象的展开运算符
+
+computed:{
+    //当countGet为count和state中的count同名可用这种写法
+    ...mapState(['count'])
+    ...mapState({
+        countGet:'count',
+        countGet:state=>state.count,
+        countGet(state){
+            return state.count
+        }
+    })
+
+    ...mapGetters(['countg'])
+
+}
+
+
+数据修改：
+设置两个点击按钮：
+一个点击，count同步加一                 @click="addCount"
+另一个点击，count等待一秒加一（异步）       @click="addCountByasyncAction"
+
+同步：
+methods:{
+    addCount(){
+        this.$store.commit('addcount',{num:1})
+    }
+}
+
+mutations:{
+    addcount(state,payload){
+        state+=payload.num
+    }
+}
+
+异步：
+methods:{
+    addCountByasyncAction(){
+        this.$store.dispatch('addcountbyasyncaction',{num:1})
+    }
+}
+
+actions:{
+    addcountbyasyncaction({commit},payload){
+        setTimeout(()=>{
+            commit('addcountbyasync',payload.num)
+        },1000)
+    }
+}
+
+mutations:{
+    addcountbyasync(state,num){
+        state+=num
+    }
+}
+
+
+

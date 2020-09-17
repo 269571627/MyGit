@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <pre>
+        糖果，正方形求面积
+    </pre>
+</body>
+<script>
+function maxCandies( candies ,  coin ,  n ) {
+    // write code here
+    //假设梅宝使用魔法让连续n次都为正面
+    if(n === coin.length){
+        let sum = 0
+        for(let i = 0;i<candies.length;i++){
+            sum+=candies[i]
+        }
+        return sum
+    }else{
+        let sumArray = []
+        let indexArray = []
+        let nArray = []
+        let sum = 0
+        let maxn = 0
+        let max = candies[0]
+        let maxIndex
+        //取出所有为0对应的糖果数
+        for(let i = 0,j = 0; i<coin.length;i++ ){
+            //找到最多的糖果
+            if(candies[i]>max){
+                //找到最大糖果数
+                max=candies[i]
+                //找到最大糖果数对应下标
+                maxIndex = i
+            }
+            //存储0对应的糖果
+            if(coin[i]===0){
+                //0对应糖果包
+                sumArray[j]=candies[i]
+                //存储对应下标
+                indexArray[j] = i
+                j++;
+            }
+            //找出连续n次依次的糖果值
+            for(let z = 0,sumN=0; z<n;z++){
+                sumN += candies[i]
+            }
+            nArray[i] = sumN
+           
+        }
+         //找出连续n次最大的糖果值
+        for(let i = 0;i<nArray;i++){
+            if(nArray[i]>maxn){
+                maxn = nArray[i]
+            }
+        }
+
+        for(let i = 0; i<sumArray;i++){
+            sum+=sumArray[i]
+        }
+        return sum
+    }
+    
+
+
+}
+
+module.exports = {
+    maxCandies : maxCandies
+};
+</script>
+</html>

@@ -7,6 +7,8 @@
 
       <p v-show=" type === 'a' ">A v-show</p>
       <p v-show=" type === 'b' ">B v-show</p>
+      <h4>总结：3-2 条件渲染</h4>
+      <hr>
   </div>
 </template>
 

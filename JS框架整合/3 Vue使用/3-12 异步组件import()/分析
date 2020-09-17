@@ -1,0 +1,18 @@
+3-12 异步组件
+以ComponentsDemo的index.vue为例子
+
+import()函数
+
+按需加载异步加载大组件
+
+
+类似于
+import InputDemo from './input'
+import ListDemo from './list'
+都是同步引进来，同步加载
+
+异步加载,需要的时候才引进来
+componets:{
+    InputDemo:() => import('./input'),
+    ListDemo:() => import('./list')
+}

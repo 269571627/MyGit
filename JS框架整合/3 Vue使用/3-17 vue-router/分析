@@ -1,0 +1,150 @@
+3-17
+前提是熟悉Vue
+路由模式（hash、H5 history）
+
+hash模式（默认） http://localhost:8080/#/001
+history模式 http://localhost:8080/123
+
+history模式需要server端支持，前者不需要
+
+路由配置（动态路由、懒加载）
+
+路由实现：
+（1）传统开发，url改变后，立刻发起请求响应整个页面，有可能资源过多，传统开发会让页面出现白屏
+
+（2）SPA 单页面应用 Single Page Application
+
+锚点值改变后
+不会立刻发送请求，而是在某个合适的时机，发起ajax请求，页面局部渲染
+
+优点：页面不立刻跳转，用户体验好
+
+
+使用：
+在router的index中引入vue，vue-router，并注入
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+创建router实例并抛出，引入组件
+import User from '../components/VueRouterDemo/User.vue'
+这里列出三种情况，子路由，动态参数，查询，都为命名路由
+const router = new VueRouter({
+    routes:[
+        {
+            path:'/user',
+            component:User,
+            name:'user',
+            children:[
+                {
+                    path:'detail',
+                    component:UserDetail,
+                    name:'userDetail'
+                }
+            ]
+        },
+        {
+            path:'/list/:id',
+            component:List,
+            name:'listParams'
+        },
+        {
+            path:'/list',
+            component:List,
+            name:'listQuery'
+        },
+        {
+            path:'/',
+            component:Home
+        }
+    ]
+})
+
+export default router
+
+
+在main.js全局挂载进Vue实例
+import router from './router'
+new Vue({
+    router
+})
+
+在想通过路由加载子组件的父级中
+<router-link to="/user">点击渲染User</router-link>
+<router-view></router-view>
+
+在User中：
+<router-link :to="{name:'userDetail'}">点击渲染UserDetail</router-link>
+<router-view></router-view>
+
+params
+<router-link :to="{name:'listParams',params:{id:1}}"></router-link>
+<router-view></router-view>
+
+query
+<router-link :to="{name:'listQuery',query:{queryId:99}}"></router-link>
+<router-view></router-view>
+
+
+ //抛出两个对象，挂载vue实例化对象   User中
+console.log(this.$router,this.$route)
+查看
+
+
+
+全局守卫： router.js中
+router.beforeEach((to, from, next) => {
+  // ...
+})
+
+beforeEach
+beforeResolve
+router.afterEach((to, from) => {
+  // ...
+})
+
+
+
+局部守卫：组件中
+beforeRouteEnter
+beforeRouteUpdate (2.2 新增)
+beforeRouteLeave
+
+
+beforeRouteEnter (to, from, next) {
+    // 在渲染该组件的对应路由被 confirm 前调用
+    // 不！能！获取组件实例 `this`
+    // 因为当守卫执行前，组件实例还没被创建
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 在当前路由改变，但是该组件被复用时调用
+    // 举例来说，对于一个带有动态参数的路径 /foo/:id，在 /foo/1 和 /foo/2 之间跳转的时候，
+    // 由于会渲染同样的 Foo 组件，因此组件实例会被复用。而这个钩子就会在这个情况下被调用。
+    // 可以访问组件实例 `this`
+  },
+  beforeRouteLeave (to, from, next) {
+    // 导航离开该组件的对应路由时调用
+    // 可以访问组件实例 `this`
+  }
+
+
+
+路由元信息meta，动态改变标题的例子
+{
+    path: '/login',
+    component: Login,
+    meta:{title:'Login'}
+},
+
+
+router.beforeEach((to,from,next)=>{
+    console.log("beforeEach",to,from,next)
+    if(to.meta.title){
+        document.title = to.meta.title
+    }else{
+        document.title = 'Vue Demo'
+    }
+    next()
+})
+
+

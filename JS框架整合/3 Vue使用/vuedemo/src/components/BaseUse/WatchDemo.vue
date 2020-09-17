@@ -2,8 +2,8 @@
   <div>
     <h4>(2)侦听器WatchDemo</h4>
     <div>
-      <input type="text" v-model="name" />
-      <input type="text" v-model="info.city" />
+      浅度：<input type="text" v-model="name" />
+      深度：<input type="text" v-model="info.city" />
     </div>
   </div>
 </template>

@@ -1,0 +1,21 @@
+4-3
+组件data的数据一旦变化，立刻触发视图的更新
+实现数据驱动视图的第一步
+考察Vue原理的第一题
+
+核心api-object.defineProperty
+代码样式 Vue3.0启用Proxy
+defineProperty缺点
+
+Proxy有兼容性不好，且无法polyfill
+
+object.defineProperty实现响应式
+监听对象，监听数组
+
+复杂对象，深度监听
+
+几个缺点：
+深度监听，需要递归到底，一次性计算量大
+无法监听新增和删除属性（Vue.set/Vue.delete）
+
+4-3~4-5 XXXX

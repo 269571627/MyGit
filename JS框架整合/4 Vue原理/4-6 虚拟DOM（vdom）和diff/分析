@@ -1,0 +1,19 @@
+4-6 virtual dom 和diff
+
+vdom是实现vue的基石
+
+diff算法是vdom中最核心最关键的部分
+
+vdom是一个热门话题
+
+DOM操作非常耗时
+
+Vue是数据驱动视图，如何有效控制DOM操作
+
+用JS模拟DOM结构：tag、props、children
+
+通过snabbdom学习vdom
+
+简洁强大的vdom库，易学易用
+Vue参考它实现的vdom和diff
+https://github.com/snabbdom/snabbdom

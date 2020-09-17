@@ -1,0 +1,14 @@
+4-2
+MVVM 数据驱动视图
+
+很久以前的组件化
+asp，jsp，php已经有组件化
+
+nodejs也有类似的组件化
+
+
+数据驱动视图
+传统组件，只是静态渲染，更新还是依赖于操作DOM
+
+Vue MVVM
+model view viewmodel

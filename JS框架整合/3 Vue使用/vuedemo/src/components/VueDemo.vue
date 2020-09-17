@@ -1,17 +1,24 @@
 <template>
   <div>
-    <h1>{{msg}}</h1>
+    <h1>{{msg}}(BaseUse)</h1>
     <hr>
-    <h2>目录</h2>
+    <h3>目录</h3>
     <h3>1 指令、插值:TplDemo</h3>
     <h3>2 计算属性和侦听器:ComputedDemo&WatchDemo</h3>
     <h3>3 class&style:ClassDemo</h3>
+    <h3>4 条件渲染:IfShowDemo</h3>
+    <h3>5 循环渲染:ListDemo</h3>
+    <h3>6 事件、修饰符:EventDemo</h3>
+    <h3>7 表单:FormDemo</h3>
     <hr>
     <TplDemo/>
     <WatchDemo/>
     <ComputedDemo/>
     <ClassDemo/>
     <IfShowDemo/>
+    <ListDemo/>
+    <EventDemo/>
+    <FormDemo/>
   </div>
 </template>
 
@@ -21,6 +28,9 @@ import WatchDemo from './BaseUse/WatchDemo'
 import ComputedDemo from './BaseUse/ComputedDemo'
 import ClassDemo from './BaseUse/ClassDemo'
 import IfShowDemo from './BaseUse/IfShowDemo'
+import ListDemo from './BaseUse/ListDemo'
+import EventDemo from './BaseUse/EventDemo'
+import FormDemo from './BaseUse/FormDemo'
 export default {
   name: 'VueDemo',
   props: {
@@ -31,7 +41,10 @@ export default {
     WatchDemo,
     ComputedDemo,
     ClassDemo,
-    IfShowDemo
+    IfShowDemo,
+    ListDemo,
+    EventDemo,
+    FormDemo
   }
 }
 </script>

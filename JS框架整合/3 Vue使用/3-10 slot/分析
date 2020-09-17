@@ -1,0 +1,31 @@
+3-10 slot
+1、基本使用（父传子）
+（1）在父级中的子组件动态绑定属性传递数据
+<SlotDemo :fsendSonObj='slotObj'>
+    {{slotObj.msg}}  【1】
+</SlotDemo>
+
+（2）在子组件中props接收数据props:{}
+<slot>放入默认值</slot>
+在父组件【1】为空时显示slot包裹的数据
+【1】有值时会插入到slot中覆盖默认值
+
+
+2、作用域插槽（子传父）
+子组件中动态绑定传的值
+<slot :sonMsg="slotObj">默认内容</slot>
+
+父级的子组件中写入template，绑定v-slot,接收值
+<template v-slot="sonSlotMsg">
+    <p>{{sonSlotMsg.sonMsg.msg}}</p>
+</template>
+
+
+3、具名插槽
+父级的子组件中有多个要插入的值，如同时有父传子、子传父、默认情况用：
+<template v-slot:basic></template>来绑定名字
+
+在子组件中 <slot name="basic">进行绑定
+
+v-slot="" 对应 <slot></slot> 默认情况
+
