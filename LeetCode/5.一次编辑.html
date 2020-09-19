@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5.一次编辑</title>
+    <style>
+        pre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        字符串有三种编辑操作:插入一个字符、删除一个字符或者替换一个字符。
+        给定两个字符串，编写一个函数判定它们是否只需要一次(或者零次)编辑。
+
+        示例 1:
+        输入: 
+        first = "pale"
+        second = "ple"
+        输出: True
+         
+
+        示例 2:
+        输入: 
+        first = "pales"
+        second = "pal"
+        输出: False
+
+        方法：双指针
+    </pre>
+    <script>
+        var oneEditAway = function (first, second) {
+            if (first === second) {
+                return true
+            }
+            let len1 = first.length
+            let len2 = second.length
+            let num = Math.abs(len1 - len2)
+            if (num > 1) {
+                return false
+            }
+
+            let i = 0, j = len1 - 1, k = len2 - 1
+           
+            while(i<len1 && i<len2 && first[i]===second[i]){
+                console.log("A1:",i,first[i],second[i])
+                ++i;
+                console.log("A2:",i,first[i],second[i])
+            }
+            while(j>-1 && k>-1 && first[j] === second[k]){
+                console.log("B1:",j,k,first[j],second[k])
+                --j;
+                --k;
+                console.log("B2:",j,k,first[j],second[k])
+            }
+            return j-i<1 && k-i<1;
+
+        };
+    </script>
+</body>
+
+</html>

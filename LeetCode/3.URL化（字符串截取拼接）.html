@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3.URL化</title>
+    <style>
+        pre{
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        URL化。编写一种方法，将字符串中的空格全部替换为%20。
+        假定该字符串尾部有足够的空间存放新增字符，并且知道字符串的“真实”长度。
+        示例1:
+        输入："Mr John Smith    ", 13
+        输出："Mr%20John%20Smith"
+
+        示例2:
+        输入："               ", 5
+        输出："%20%20%20%20%20"
+
+
+        方法一：字符串变数组，循环把空格变成%20，截取数组length长度，join("")拼接为字符串
+        方法二：字符串截取长度后，按空格分割为数组，直接join("%20")为字符串
+
+        注意：splice数组截取长度，原数组改变，
+            substr字符串截取长度，substr(1,3)包含3的元素
+    </pre>
+    <script>
+    //方法一
+    // var replaceSpaces = function(S, length) {
+    //     let sarry = S.split('')
+    //     for(let i = 0;i<sarry.length;i++){
+    //         if(sarry[i] === ' '){
+    //             sarry[i] = '%20'
+    //         }
+    //     }
+    //     return sarry.splice(0,length).join("")
+    // };
+
+    //方法二
+    var replaceSpaces = function(S, length) {
+        return S.substr(0,length).split(" ").join("%20")
+    };
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2.字符串重排</title>
+    <style>
+        pre{
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        给定两个字符串 s1 和 s2，请编写一个程序，确定其中一个字符串的字符重新排列后，能否变成另一个字符串。
+
+        示例 1：
+        输入: s1 = "abc", s2 = "bca"
+        输出: true 
+
+        方法一：字符串split转为数组，双重循环delete去重，防止重复查找
+        方法二：sort() 方法用于对数组的元素进行排序再变为字符串直接对比。
+        注：'abc'==='abc' //true
+            ['a','b','c']===['a','b','c'] //false
+        原因：值类型和引用类型
+        引用类型存储的为地址
+    </pre>
+    <script>
+        //方法一
+        // var CheckPermutation = function(s1, s2) {
+        //     if(s1.length === s2.length){
+        //         let flag = 0
+        //         let length = s1.length
+        //         let sp1 = s1.split('')
+        //         let sp2 = s2.split('')
+        //         for(let i = 0 ;i<length;i++){
+        //             for(let j = 0;j<length;j++){
+        //                 if(sp1[i]===sp2[j]){
+        //                     flag++
+        //                     delete sp2[j]
+        //                     console.log(sp2,flag)
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //         if(flag === length){
+        //             return true
+        //         }
+        //         else{
+        //             return false
+        //         }
+        //     }else{
+        //         return false
+        //     }
+        // };
+
+        //方法二：
+        var CheckPermutation = function(s1, s2) {
+           return s1.split('').sort().toString() === s2.split('').sort().toString()
+        };
+    </script>
+</body>
+</html>
