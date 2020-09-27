@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>7.旋转矩阵</title>
+    <style>
+        pre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节。
+        请你设计一种算法，将图像旋转 90 度。
+
+        不占用额外内存空间能否做到？
+
+        示例 1:
+
+        给定 matrix = 
+        [
+        [1,2,3],
+        [4,5,6],
+        [7,8,9]
+        ],
+
+        原地旋转输入矩阵，使其变为:
+        [
+        [7,4,1],
+        [8,5,2],
+        [9,6,3]
+        ]
+
+        注：尝试数组reverse()颠倒后查看特点
+        交换对角线上的数：[[0,1],[1,0]]=[[1,0],[0,1]]
+    </pre>
+
+    <script>
+        var rotate = function (matrix) {
+            let n = matrix.length
+            matrix.reverse()
+            for (let i = 0; i < n; i++) {
+                for (let j = 0; j < i; j++) {
+                    [matrix[i][j], matrix[j][i]] = [matrix[j][i], matrix[i][j]]
+                }
+            }
+            return matrix
+        };
+    </script>
+</body>
+
+</html>

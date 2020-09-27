@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>6.字符串压缩</title>
+    <style>
+        pre {
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <pre>
+        字符串压缩。利用字符重复出现的次数，编写一种方法，
+        实现基本的字符串压缩功能。
+        比如，字符串aabcccccaaa会变为a2b1c5a3。
+        若“压缩”后的字符串没有变短，则返回原先的字符串。
+        你可以假设字符串中只包含大小写英文字母（a至z）。
+
+        示例1:
+        输入："aabcccccaaa"
+        输出："a2b1c5a3"
+        
+        提示：不要想着删掉重复的后面的元素，如aaaa删掉后面三个a，
+        想想用slice把前3个去掉加count数组变字符串。
+    </pre>
+    <script>
+        var compressString = function (S) {
+            let str = new String
+            let count = 1
+            for (let i = 1; i < S.length + 1; i++) {
+                console.log(i,str)
+                if (S[i - 1] != S[i]) {
+                    str += S.slice(i - 1, i) + count
+                    count = 1
+                } else {
+                    count++
+                }
+            }
+            return str.length < S.length ? str : S
+        };
+
+    </script>
+</body>
+
+</html>
